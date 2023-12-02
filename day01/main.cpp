@@ -6,10 +6,13 @@
 
 using namespace std;
 
-string replaceLitteralNumbers(string str)
+/*
+* Replace each word with its first letter + the corresponding number and its last letter.
+*/
+string replaceNumberWrittenInLetter(string str)
 {
     char const* digits = "0123456789";
-    cout << str << '\n';
+
     std::map<std::string, std::string> litteralNumber = {
         {"1", "one"},
         {"2", "two"},
@@ -26,16 +29,17 @@ string replaceLitteralNumbers(string str)
         str = std::regex_replace(str, std::regex(pair.second), pair.second[0] + pair.first + pair.second[pair.second.length() - 1]);
     }
 
-    cout << str << '\n';
-
     return str;
 }
 
-int extractValue(string str, bool replace)
+/*
+* Extract a number composed of the first and last digits appearing in a string
+*/
+int extractTwoDigitNumber(string str, bool replace)
 {
     char const* digits = "0123456789";
 
-    if (replace) str = replaceLitteralNumbers(str);
+    if (replace) str = replaceNumberWrittenInLetter(str);
 
     size_t firstDigit = str.find_first_of(digits);
     size_t lastDigit = str.find_last_of(digits);
@@ -52,16 +56,22 @@ int main() {
 
     newfile.open("day01/input.txt", ios::in); 
     if (newfile.is_open()) { 
+
         string line;
+
         int totalPuzzle1 = 0;
         int totalPuzzle2 = 0;
-        while (getline(newfile, line)) { 
-            totalPuzzle1 += extractValue(line, false);
-            totalPuzzle2 += extractValue(line, true);
-        }
-        newfile.close(); 
 
-        cout << "Total puzzle 1 : " << totalPuzzle1 << '\n';
-        cout << "Total puzzle 2 : " << totalPuzzle2 << '\n';
+        while (getline(newfile, line)) { 
+            totalPuzzle1 += extractTwoDigitNumber(line, false);
+            totalPuzzle2 += extractTwoDigitNumber(line, true);
+        }
+
+        newfile.close(); 
+        cout << "Advent of Code 2023" << '\n';
+        cout << "Day 1: Trebuchet?!" << "\n\n";
+
+        cout << "Answer puzzle 1 : " << totalPuzzle1 << '\n';
+        cout << "Answer puzzle 2 : " << totalPuzzle2 << '\n';
     }
 }
