@@ -1,2 +1,11 @@
 # Advent of Code 2023
-My solutions for Advent of Code 2023 (maybe).
+<b> My C++ solutions for the Advent of Code 2023. </b>
+
+Day 1: Trebuchet?! ⭐⭐  
+Day 2: Cube Conundrum ⭐⭐
+
+## License 
+The MIT License.  
+Copyright © 2023 Thomas Bichot.
+
+🎄
