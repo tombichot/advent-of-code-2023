@@ -400,3 +400,5 @@ FodyWeavers.xsd
 *.sln
 *.vcxproj
 *.vcxproj.filters
+
+.DS_Store
