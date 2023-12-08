@@ -26,7 +26,7 @@ vector<string> splitString(const string& input, char delimiter) {
 /*
 * Parse the string of a game to get the highest number of revealed cubes for each color (red, green, blue)
 */
-array<int, 3> parseGame(string str) {
+array<int, 3> parseGame(const string& str) {
     array<string, 3> colors = {"red", "green", "blue"};
 
     array<int, 3> game = { 0, 0, 0 };
@@ -61,7 +61,7 @@ array<int, 3> parseGame(string str) {
 /*
 * Checks whether or not a game is possible for a given bag of cubes
 */
-bool checkGame(array<int, 3> game) {
+bool checkGame(const array<int, 3>& game) {
     const int bag[3] = { 12, 13, 14 }; //RGB
 
     if (game[0] <= bag[0] && game[1] <= bag[1] && game[2] <= bag[2]) {

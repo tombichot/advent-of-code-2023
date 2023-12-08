@@ -39,7 +39,7 @@ string replaceAllSubstring(string str, string oldString, string newString) {
 /*
 * Convert a string to a vector of int
 */
-vector<int> convertString(string str) {
+vector<int> convertString(const string& str) {
     vector<int> numbers;
 
     vector<string> tmp = splitString(str, ' ');
@@ -54,7 +54,7 @@ vector<int> convertString(string str) {
 /*
 * Extract the winning numbers and my numbers from a string and return them as vector of int
 */
-vector<vector<int>> parse(string str) {
+vector<vector<int>> parse(const string& str) {
     vector<vector<int>> card;
     
     //Remove Card #:
@@ -81,7 +81,7 @@ vector<vector<int>> parse(string str) {
 /*
 * Calculate point with maching numbers in a card
 */
-int getPoints(vector<int> winningNumbers, vector<int> myNumbers) {
+int getPoints(const vector<int>& winningNumbers, const vector<int>& myNumbers) {
     int sum = 0;
 
     for (int winningNumber : winningNumbers) {
@@ -99,7 +99,7 @@ int getPoints(vector<int> winningNumbers, vector<int> myNumbers) {
 /*
 * Count maching numbers in a card
 */
-int countMachingNumbers(vector<int> winningNumbers, vector<int> myNumbers) {
+int countMachingNumbers(const vector<int>& winningNumbers, const vector<int>& myNumbers) {
     int sum = 0;
 
     for (int winningNumber : winningNumbers) {

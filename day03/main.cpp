@@ -8,7 +8,7 @@ using namespace std;
 /*
 * Check whether a character is a symbol or not
 */
-bool isSymbol(char c) {
+bool isSymbol(const char& c) {
     if (!isdigit(c) && c != '.') {
         return true;
     }
@@ -18,7 +18,7 @@ bool isSymbol(char c) {
 /*
 * Get the sum of all number (part numbers) adjacent to a symbol in the engine
 */
-int getSumOfAllPartNumbers(vector<string> engine) {
+int getSumOfAllPartNumbers(const vector<string>& engine) {
     int sum = 0;
     
     int lineLength = engine[0].length();
@@ -68,7 +68,7 @@ int getSumOfAllPartNumbers(vector<string> engine) {
 /*
 * Get the sum of all gear ratios (multiple of two number adjacent to *) in the engine
 */
-int getSumOfAllGearRatios(vector<string> engine) {
+int getSumOfAllGearRatios(const vector<string>& engine) {
     int sum = 0;
 
     int lineLength = engine[0].length();
