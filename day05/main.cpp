@@ -128,6 +128,6 @@ int main() {
         cout << "Day 5: If You Give A Seed A Fertilizer" << "\n\n";
 
         cout << "Answer puzzle 1 : " << locationPart1 << '\n';
-        cout << "Answer puzzle 1 : " << locationPart2 << '\n';
+        cout << "Answer puzzle 2 : " << locationPart2 << '\n';
     }
 }

@@ -82,6 +82,6 @@ int main() {
         cout << "Day 6: Wait For It" << "\n\n";
 
         cout << "Answer puzzle 1 : " << puzzlePart1 << '\n';
-        cout << "Answer puzzle 1 : " << puzzlePart2 << '\n';
+        cout << "Answer puzzle 2 : " << puzzlePart2 << '\n';
     }
 }
