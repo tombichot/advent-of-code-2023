@@ -9,7 +9,7 @@ using namespace std;
 /*
 * Replace each word with its first letter + the corresponding number and its last letter.
 */
-string replaceNumberWrittenInLetter(string str)
+string replaceNumberWrittenInLetter(string& str)
 {
     char const* digits = "0123456789";
 
@@ -35,7 +35,7 @@ string replaceNumberWrittenInLetter(string str)
 /*
 * Extract a number composed of the first and last digits appearing in a string
 */
-int extractTwoDigitNumber(string str, bool replace)
+int extractTwoDigitNumber(string& str, const bool& replace)
 {
     char const* digits = "0123456789";
 
@@ -52,26 +52,28 @@ int extractTwoDigitNumber(string str, bool replace)
 }
 
 int main() {
+    cout << "Advent of Code 2023" << '\n';
+    cout << "Day 1: Trebuchet?!" << "\n\n";
+
     fstream newfile;
 
-    newfile.open("day01/input.txt", ios::in); 
+    newfile.open("./input.txt", ios::in); 
     if (newfile.is_open()) { 
 
         string line;
 
-        int totalPuzzle1 = 0;
-        int totalPuzzle2 = 0;
+        int puzzleAnswer1 = 0;
+        int puzzleAnswer2 = 0;
 
         while (getline(newfile, line)) { 
-            totalPuzzle1 += extractTwoDigitNumber(line, false);
-            totalPuzzle2 += extractTwoDigitNumber(line, true);
+            puzzleAnswer1 += extractTwoDigitNumber(line, false);
+            puzzleAnswer2 += extractTwoDigitNumber(line, true);
         }
 
         newfile.close(); 
-        cout << "Advent of Code 2023" << '\n';
-        cout << "Day 1: Trebuchet?!" << "\n\n";
 
-        cout << "Answer puzzle 1 : " << totalPuzzle1 << '\n';
-        cout << "Answer puzzle 2 : " << totalPuzzle2 << '\n';
+        //Answers
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
     }
 }

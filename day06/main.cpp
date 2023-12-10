@@ -25,9 +25,12 @@ vector<int> getNumbers(string str) {
 }
 
 int main() {
+    cout << "Advent of Code 2023" << '\n';
+    cout << "Day 6: Wait For It" << "\n\n";
+
     fstream newfile;
 
-    newfile.open("day06/input.txt", ios::in); 
+    newfile.open("./input.txt", ios::in);
     if (newfile.is_open()) { 
 
         string line;
@@ -46,7 +49,7 @@ int main() {
 
         //Processing
         //Part 1
-        int puzzlePart1 = 1;
+        int puzzleAnswer1 = 1;
         int speed = 1;
 
         for (int i = 0; i < times.size(); i++) {
@@ -55,11 +58,11 @@ int main() {
                 int d = (j * speed) * (times[i] - j);
                 if (d > distances[i]) count++;
             }
-            puzzlePart1 *= count;
+            puzzleAnswer1 *= count;
         }
 
         //Part 2
-        int puzzlePart2 = 0;
+        int puzzleAnswer2 = 0;
 
         ostringstream ossTime;
         ostringstream ossDistance;
@@ -74,14 +77,11 @@ int main() {
 
         for (long long int j = 0; j <= time; j++) {
             long long int d = (j * speed) * (time - j);
-            if (d > distance) puzzlePart2++;
-        }
+            if (d > distance) puzzleAnswer2++;
+        }        
 
-        //Display
-        cout << "Advent of Code 2023" << '\n';
-        cout << "Day 6: Wait For It" << "\n\n";
-
-        cout << "Answer puzzle 1 : " << puzzlePart1 << '\n';
-        cout << "Answer puzzle 2 : " << puzzlePart2 << '\n';
+        //Answers
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
     }
 }

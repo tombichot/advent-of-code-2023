@@ -114,15 +114,18 @@ int countMachingNumbers(const vector<int>& winningNumbers, const vector<int>& my
 }
 
 int main() {
+    cout << "Advent of Code 2023" << '\n';
+    cout << "Day 4: Scratchcards" << "\n\n";
+
     fstream newfile;
 
-    newfile.open("day04/input.txt", ios::in); 
+    newfile.open("./input.txt", ios::in); 
     if (newfile.is_open()) { 
 
         string line;
         
-        int totalPuzzle1 = 0;
-        int totalPuzzle2 = 0;
+        int puzzleAnswer1 = 0;
+        int puzzleAnswer2 = 0;
 
         vector<vector<int>> winningCards; 
         vector<vector<int>> myCards;
@@ -139,7 +142,7 @@ int main() {
         int size = winningCards.size();
         vector<int> cards(size);
         for (int i = 0; i < size; i++) {
-            totalPuzzle1 += getPoints(winningCards[i], myCards[i]);
+            puzzleAnswer1 += getPoints(winningCards[i], myCards[i]);
 
             cards[i] = cards[i] + 1;
 
@@ -149,15 +152,13 @@ int main() {
                 if(j < size) cards[j] = cards[j] + cards[i];
             }
 
-            totalPuzzle2 += cards[i];
+            puzzleAnswer2 += cards[i];
         }
 
         newfile.close(); 
-
-        cout << "Advent of Code 2023" << '\n';
-        cout << "Day 4: Scratchcards" << "\n\n";
         
-        cout << "Answer puzzle 1 : " << totalPuzzle1 << '\n';
-        cout << "Answer puzzle 2 : " << totalPuzzle2 << '\n';
+        //Answers
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
     }
 }

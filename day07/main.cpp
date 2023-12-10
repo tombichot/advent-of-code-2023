@@ -118,9 +118,12 @@ bool sortHandsWithJoker(const tuple<string, int, int>& a, const tuple<string, in
 }
 
 int main() {
+    cout << "Advent of Code 2023" << '\n';
+    cout << "Day 7: Camel Cards" << "\n\n";
+
     fstream newfile;
 
-    newfile.open("day07/input.txt", ios::in); 
+    newfile.open("./input.txt", ios::in); 
     if (newfile.is_open()) { 
 
         string line;
@@ -138,28 +141,25 @@ int main() {
 
         //Processing
         //Part 1
-        int puzzlePart1 = 0;
+        int puzzleAnswer1 = 0;
 
         sort(hands.begin(), hands.end(), sortHands);
 
         for (int i = 0; i < hands.size(); i++) {
-            puzzlePart1 += (i + 1) * get<1>(hands[i]);
+            puzzleAnswer1 += (i + 1) * get<1>(hands[i]);
         }
 
         //Part 2
-        int puzzlePart2 = 0;
+        int puzzleAnswer2 = 0;
 
         sort(hands2.begin(), hands2.end(), sortHandsWithJoker);
 
         for (int i = 0; i < hands2.size(); i++) {
-            puzzlePart2 += (i + 1) * get<1>(hands2[i]);
+            puzzleAnswer2 += (i + 1) * get<1>(hands2[i]);
         }
-
-        //Display
-        cout << "Advent of Code 2023" << '\n';
-        cout << "Day 7: Camel Cards" << "\n\n";
-
-        cout << "Answer puzzle 1 : " << puzzlePart1 << '\n';
-        cout << "Answer puzzle 2 : " << puzzlePart2 << '\n';
+       
+        //Answers
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
     }
 }

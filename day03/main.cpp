@@ -119,9 +119,12 @@ int getSumOfAllGearRatios(const vector<string>& engine) {
 }
 
 int main() {
+    cout << "Advent of Code 2023" << '\n';
+    cout << "Day 3: Gear Ratios" << "\n\n";
+
     fstream newfile;
 
-    newfile.open("day03/input.txt", ios::in); 
+    newfile.open("./input.txt", ios::in);
     if (newfile.is_open()) { 
 
         string line;
@@ -129,20 +132,18 @@ int main() {
         vector<string> engine;
         
         while (getline(newfile, line)) { 
-            engine.push_back(line); //Get engine
+            //Get engine
+            engine.push_back(line); 
         }
 
         newfile.close(); 
-
-        cout << "Advent of Code 2023" << '\n';
-        cout << "Day 3: Gear Ratios" << "\n\n";
         
         //Processing
-        int totalPuzzle1 = getSumOfAllPartNumbers(engine);
-        int totalPuzzle2 = getSumOfAllGearRatios(engine);
+        int puzzleAnswer1 = getSumOfAllPartNumbers(engine);
+        int puzzleAnswer2 = getSumOfAllGearRatios(engine);
 
-
-        cout << "Answer puzzle 1 : " << totalPuzzle1 << '\n';
-        cout << "Answer puzzle 2 : " << totalPuzzle2 << '\n';
+        //Answers
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
     }
 }

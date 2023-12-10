@@ -68,9 +68,12 @@ void processSeedsRange(const long long int& start, const long long int& end, con
 }
 
 int main() {
+    cout << "Advent of Code 2023" << '\n';
+    cout << "Day 5: If You Give A Seed A Fertilizer" << "\n\n";
+
     fstream newfile;
 
-    newfile.open("day05/input.txt", ios::in); 
+    newfile.open("./input.txt", ios::in);
     if (newfile.is_open()) { 
 
         string line;
@@ -103,31 +106,28 @@ int main() {
 
         //Processing
         //Part 1
-        long long int locationPart1 = -1;
+        long long int puzzleAnswer1 = -1;
 
         for (int i = 0; i < seeds.size(); i++) {
             long long int tmp = getLocation(maps, seeds[i]);
-            if (locationPart1 > tmp || locationPart1 == -1) locationPart1 = tmp;
+            if (puzzleAnswer1 > tmp || puzzleAnswer1 == -1) puzzleAnswer1 = tmp;
         }
 
         //Part 2
-        long long int locationPart2 = -1;
+        long long int puzzleAnswer2 = -1;
 
         vector<thread> threads;
 
         for (int t = 0; t < seeds.size(); t += 2) {
-            threads.emplace_back(processSeedsRange, std::ref(seeds[t]), std::ref(seeds[t+1]), std::ref(maps), std::ref(locationPart2));
+            threads.emplace_back(processSeedsRange, std::ref(seeds[t]), std::ref(seeds[t+1]), std::ref(maps), std::ref(puzzleAnswer2));
         }
 
         for (auto& th : threads) {
             th.join();
         }    
 
-        //Display
-        cout << '\n' << "Advent of Code 2023" << '\n';
-        cout << "Day 5: If You Give A Seed A Fertilizer" << "\n\n";
-
-        cout << "Answer puzzle 1 : " << locationPart1 << '\n';
-        cout << "Answer puzzle 2 : " << locationPart2 << '\n';
+        //Answers
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
     }
 }

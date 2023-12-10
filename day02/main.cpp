@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Split a string into several parts according to a delimiter
 */
-vector<string> splitString(const string& input, char delimiter) {
+vector<string> splitString(const string& input, const char delimiter) {
     vector<string> tokens;
     stringstream ss(input);
     string token;
@@ -72,9 +72,12 @@ bool checkGame(const array<int, 3>& game) {
 }
 
 int main() {
+    cout << "Advent of Code 2023" << '\n';
+    cout << "Day 2: Cube Conundrum" << "\n\n";
+
     fstream newfile;
 
-    newfile.open("day02/input.txt", ios::in); 
+    newfile.open("./input.txt", ios::in);
     if (newfile.is_open()) { 
 
         string line;
@@ -82,23 +85,22 @@ int main() {
         vector<array<int, 3>> games;
         
         while (getline(newfile, line)) { 
-             games.push_back(parseGame(line)); //Get all games
+             games.push_back(parseGame(line)); 
         }
 
         newfile.close(); 
 
-        cout << "Advent of Code 2023" << '\n';
-        cout << "Day 2: Cube Conundrum" << "\n\n";
-        
         //Processing
-        int totalPuzzle1 = 0;
-        int totalPuzzle2 = 0;
+        int puzzleAnswer1 = 0;
+        int puzzleAnswer2 = 0;
+
         for (int i = 0; i < games.size(); ++i) {
-            if(checkGame(games[i])) totalPuzzle1 += i + 1; //Puzzle 1
-            totalPuzzle2 += games[i][0] * games[i][1] * games[i][2]; //Puzzle 2
+            if(checkGame(games[i])) puzzleAnswer1 += i + 1;
+            puzzleAnswer2 += games[i][0] * games[i][1] * games[i][2];
         }
 
-        cout << "Answer puzzle 1 : " << totalPuzzle1 << '\n';
-        cout << "Answer puzzle 2 : " << totalPuzzle2 << '\n';
+        //Answers
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
     }
 }
