@@ -9,6 +9,7 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
+#include <iterator>
 
 using namespace std;
 mutex mtx;
@@ -31,24 +32,70 @@ vector<long long int> split(const string& input) {
 /*
 * Find a location starting from a seed with a map
 */
-long long int getLocation(const list<list<vector<long long int>>>& maps, long long int seed) {
-    long long int location = seed; //Start
-    for (const auto& map : maps) {
-        bool stop = false;
-        for (const auto& m : map) {
-            long long int SRS = m[1];
-            long long int DRS = m[0];
-            long long int range = m[2] - 1;
+long long int getLocation(const list<list<vector<long long int>>>& maps, const long long int& seed) {
+    long long int location = seed;
+    
+    //cout << "Seed : " << seed << endl;
 
-            if (!stop && location >= SRS && location <= SRS + range) {
-                stop = true;
-                //cout << DRS << " | " << SRS << " | " << range << '\n';
-                if (SRS > DRS) location += DRS - SRS;
-                else if (SRS < DRS) location += DRS - SRS;
+        //cout << "----" << endl;
+    for (const auto& map : maps) {
+        for (const auto& m : map) {
+
+            //cout << m[0] << " " << m[1] << " " << m[2] << endl;
+
+            long long int SRS = m[1]; // Source range start
+            long long int range = m[2];
+            
+            if (location >= SRS && location < SRS + range) {
+                long long int DRS = m[0];; // Destination range start
+                location += DRS - SRS;
+                break;
+            }
+        }
+
+        //cout << "Location : " << location << endl;
+    }
+
+    //cout << "--------------" << endl;
+
+    return location;
+}
+
+long long int getSeed(const list<list<vector<long long int>>>& maps, const long long int& location, const vector<string>& almanac) {
+    long long int seed = location;
+    for (auto it = maps.rbegin(); it != maps.rend(); ++it) {
+        for (const auto& m : *it) {
+ 
+            long long int DRS = m[0]; // Destination range start
+            long long int range = m[2];
+            if(seed < DRS) {
+                break;
+            }
+            else if (seed >= DRS && seed < DRS + range) {
+                long long int SRS = m[1]; // Source range start
+                seed -= DRS - SRS;
+                break;
             }
         }
     }
-    return location;
+    
+    return seed;
+}
+
+
+list<vector<long long int>> getElementAtIndex(const list<list<vector<long long int>>>& maps, int index) {
+    auto it = maps.begin();
+    advance(it, index);
+    return *it;
+}
+
+bool isSeed(const vector<long long int>& seeds, const long long int& value){
+    for (const long long int& seed : seeds) {
+        if (seed == value) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*
@@ -67,9 +114,30 @@ void processSeedsRange(const long long int& start, const long long int& end, con
     mtx.unlock();
 }
 
+bool compareSourceRangeStart(const vector<long long int> &a, const vector<long long int> &b) {
+    return a[0] < b[0];
+}
+
+list<vector<long long int>> addMissingRules(list<vector<long long int>> map){
+    list<vector<long long int>> newMap;
+    for (const auto& m : map) {
+        if (newMap.empty()) {
+            if(m[1] != 0) newMap.push_back({0, 0, m[1]});
+        }
+        else {
+            vector<long long int> last = newMap.back();
+            if(last[1] + last[2] < m[1]) newMap.push_back({last[2], last[2], m[1] - last[2]});
+        }
+        newMap.push_back(m);
+    }
+
+    return newMap;
+}
+
 int main() {
-    cout << "Advent of Code 2023" << '\n';
-    cout << "Day 5: If You Give A Seed A Fertilizer" << "\n\n";
+    cout << "Advent of Code 2023" << endl;
+    cout << "Day 5: If You Give A Seed A Fertilizer" << endl;
+    cout << endl;
 
     fstream newfile;
 
@@ -81,7 +149,7 @@ int main() {
         vector<string> almanac = { "seed-to-soil", "soil-to-fertilizer", "fertilizer-to-water", "water-to-light", "light-to-temperature", "temperature-to-humidity", "humidity-to-location" };
         vector<long long int> seeds;
 
-        int i = 0;
+        int count = 0;
         list<list<vector<long long int>>> maps;
         list<vector<long long int>> map;
 
@@ -91,43 +159,91 @@ int main() {
                 seeds = split(line.erase(0, 7));
             }
             else if (line.empty() && map.size() > 0) {
+                map.sort(compareSourceRangeStart);
+                //map = addMissingRules(map);
                 maps.push_back(map);
                 map.clear();
-                i++;
+                count++;
             }
-            else if (!line.empty() && line.find(almanac[i]) == string::npos) {
+            else if (!line.empty() && line.find(almanac[count]) == string::npos) {
                 map.push_back(split(line));
             }
         }
-
+        map.sort(compareSourceRangeStart);
         maps.push_back(map);
 
         newfile.close();
+
+/*
+        //Debug maps
+        count = 0;
+        for (const auto& map : maps) {
+            cout << almanac[count] << endl;
+            for (const auto& m : map) {
+                 cout << m[0] << " " << m[1] << " " << m[2] << endl;
+            }
+            count++;
+        }
+        cout << endl;
+*/
 
         //Processing
         //Part 1
         long long int puzzleAnswer1 = -1;
 
         for (int i = 0; i < seeds.size(); i++) {
-            long long int tmp = getLocation(maps, seeds[i]);
-            if (puzzleAnswer1 > tmp || puzzleAnswer1 == -1) puzzleAnswer1 = tmp;
+            long long int location = getLocation(maps, seeds[i]);
+            if (puzzleAnswer1 > location || puzzleAnswer1 == -1) puzzleAnswer1 = location;
+            if(puzzleAnswer1 == 424490994){
+                cout << seeds[i] << endl;
+                break;
+            }
         }
 
-        //Part 2
-        long long int puzzleAnswer2 = -1;
+        long long int location = -1;
+        long long int seed = -1;
+        bool stop = false;
+        while(!stop){
+            location++;
+            long long int seed = getSeed(maps, location, almanac);
+            stop = isSeed(seeds, seed);
+        }
+        long long int puzzleAnswer2 = location;
+/*
+        auto start = chrono::high_resolution_clock::now();
 
+        for(int t = 0; t < seeds.size(); t+=2) {
+            for (long long int seed = seeds[t]; seed < seeds[t] + seeds[t+1]; seed++) {
+                long long int location = getLocation(maps, seed);
+                if (puzzleAnswer2 > location || puzzleAnswer2 == -1) puzzleAnswer2 = location;  
+            }
+        }
+
+        auto end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double, milli> duration = end - start;
+
+        cout << "Temps d'execution : " << duration.count() << " ms" << endl;
+        cout << endl;
+*/
+/*
         vector<thread> threads;
 
         for (int t = 0; t < seeds.size(); t += 2) {
-            threads.emplace_back(processSeedsRange, std::ref(seeds[t]), std::ref(seeds[t+1]), std::ref(maps), std::ref(puzzleAnswer2));
+            threads.emplace_back(processSeedsRange, ref(seeds[t]), ref(seeds[t+1]), ref(maps), ref(puzzleAnswer2));
         }
 
         for (auto& th : threads) {
             th.join();
-        }    
+        }
+*/
 
         //Answers
-        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
-        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << endl;
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << endl;
+    }
+    else {
+        std::cerr << "File not found" << std::endl;
+        return 1;
     }
 }
