@@ -119,8 +119,9 @@ int getSumOfAllGearRatios(const vector<string>& engine) {
 }
 
 int main() {
-    cout << "Advent of Code 2023" << '\n';
-    cout << "Day 3: Gear Ratios" << "\n\n";
+    cout << "Advent of Code 2023" << endl;
+    cout << "Day 3: Gear Ratios" << endl;
+    cout << endl;
 
     fstream newfile;
 
@@ -143,7 +144,7 @@ int main() {
         int puzzleAnswer2 = getSumOfAllGearRatios(engine);
 
         //Answers
-        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
-        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << endl;
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << endl;
     }
 }

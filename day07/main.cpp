@@ -118,8 +118,9 @@ bool sortHandsWithJoker(const tuple<string, int, int>& a, const tuple<string, in
 }
 
 int main() {
-    cout << "Advent of Code 2023" << '\n';
-    cout << "Day 7: Camel Cards" << "\n\n";
+    cout << "Advent of Code 2023" << endl;
+    cout << "Day 7: Camel Cards" << endl;
+    cout << endl;
 
     fstream newfile;
 
@@ -159,7 +160,7 @@ int main() {
         }
        
         //Answers
-        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
-        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << endl;
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << endl;
     }
 }

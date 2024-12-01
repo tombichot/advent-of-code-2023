@@ -72,8 +72,9 @@ bool checkGame(const array<int, 3>& game) {
 }
 
 int main() {
-    cout << "Advent of Code 2023" << '\n';
-    cout << "Day 2: Cube Conundrum" << "\n\n";
+    cout << "Advent of Code 2023" << endl;
+    cout << "Day 2: Cube Conundrum" << endl;
+    cout << endl;
 
     fstream newfile;
 
@@ -100,7 +101,7 @@ int main() {
         }
 
         //Answers
-        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
-        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << endl;
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << endl;
     }
 }

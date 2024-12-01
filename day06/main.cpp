@@ -25,8 +25,9 @@ vector<int> getNumbers(string str) {
 }
 
 int main() {
-    cout << "Advent of Code 2023" << '\n';
-    cout << "Day 6: Wait For It" << "\n\n";
+    cout << "Advent of Code 2023" << endl;
+    cout << "Day 6: Wait For It" << endl;
+    cout << endl;
 
     fstream newfile;
 
@@ -81,7 +82,7 @@ int main() {
         }        
 
         //Answers
-        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
-        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << endl;
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << endl;
     }
 }

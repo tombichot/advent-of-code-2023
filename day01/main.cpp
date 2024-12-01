@@ -52,8 +52,9 @@ int extractTwoDigitNumber(string& str, const bool& replace)
 }
 
 int main() {
-    cout << "Advent of Code 2023" << '\n';
-    cout << "Day 1: Trebuchet?!" << "\n\n";
+    cout << "Advent of Code 2023" << endl;
+    cout << "Day 1: Trebuchet?!" << endl;
+    cout << endl;
 
     fstream newfile;
 
@@ -73,7 +74,7 @@ int main() {
         newfile.close(); 
 
         //Answers
-        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
-        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << endl;
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << endl;
     }
 }

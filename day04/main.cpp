@@ -114,8 +114,9 @@ int countMachingNumbers(const vector<int>& winningNumbers, const vector<int>& my
 }
 
 int main() {
-    cout << "Advent of Code 2023" << '\n';
-    cout << "Day 4: Scratchcards" << "\n\n";
+    cout << "Advent of Code 2023" << endl;
+    cout << "Day 4: Scratchcards" << endl;
+    cout << endl;
 
     fstream newfile;
 
@@ -158,7 +159,7 @@ int main() {
         newfile.close(); 
         
         //Answers
-        cout << "Puzzle answer 1 : " << puzzleAnswer1 << '\n';
-        cout << "Puzzle answer 2 : " << puzzleAnswer2 << '\n';
+        cout << "Puzzle answer 1 : " << puzzleAnswer1 << endl;
+        cout << "Puzzle answer 2 : " << puzzleAnswer2 << endl;
     }
 }
